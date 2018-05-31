@@ -8,7 +8,8 @@ public class ClickLarneDot {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		com.edwardmooreconsulting.poferries.PageObjectModel_Homepage.LarneDot(Driver);
+		
 	}
 
 }
