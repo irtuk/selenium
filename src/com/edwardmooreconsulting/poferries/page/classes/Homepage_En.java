@@ -10,7 +10,7 @@ public class Homepage_En {
 	private static String baseURL = "http://www.poferries.com/en/portal"; 
 	
 	//return to the portal
-	private static void ReturnToPortal(WebDriver driver) {
+	public static void ReturnToPortal(WebDriver driver) {
 		driver.get(baseURL);
 	}
 	
