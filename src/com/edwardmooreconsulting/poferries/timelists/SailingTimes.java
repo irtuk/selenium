@@ -33,6 +33,9 @@ public class SailingTimes {
 		//this statement opens the list up
 		driver.findElement(By.xpath("//*[@id=\"singleJourneyTimeComboBoxSelectBoxItText\"]")).click();
 		
+		driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[2]/dd[1]/span/span/ul/li[19]/a")).click();
+		
+		
 		//List<WebElement> options = driver.findElements(By.xpath(xPathSelectOptions));
 		//List<WebElement> myList = new Select(driver.findElement(By.id("singleJourneyTimeComboBox"))).getOptions();
 		//for(int i=0;i<myList.size();i++)
