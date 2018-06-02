@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.poferries.page.classes;
+package com.edwardmooreconsulting.poferries;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

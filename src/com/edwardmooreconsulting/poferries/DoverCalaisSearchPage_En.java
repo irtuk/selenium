@@ -1,9 +1,15 @@
-package com.edwardmooreconsulting.poferries.page.classes;
+package com.edwardmooreconsulting.poferries;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
 
-public class PageFactory_DoverCalaisSearchPage_En {
+
+public class DoverCalaisSearchPage_En {
+	
+	WebDriver driver;
+	
 	
 	
 	@FindBy(id="SingleJourneyRadio")
@@ -18,6 +24,15 @@ public class PageFactory_DoverCalaisSearchPage_En {
 	@FindBy(id="ReturnJourneyDateTextBox")
 	WebElement ComingBackDate;
 	
+	//initialize the elements using the selenium PageFactory method
+	public DoverCalaisSearchPage_En(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		
+	}
+
+	
+	//methods
 	public void clickSingleRadioButton() {
 		OneWayRadioButton.click();
 	}
@@ -30,11 +45,11 @@ public class PageFactory_DoverCalaisSearchPage_En {
 		GoingOutDate.clear();
 		GoingOutDate.sendKeys(date);
 	}
-
+	
 	public void selectComingBackDate(String date) {
-		ComingBackDate.clear;
+		ComingBackDate.clear();
 		ComingBackDate.sendKeys(date);
-	}
-
+	}	
+	
 
 }
