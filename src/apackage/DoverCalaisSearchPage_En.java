@@ -3,6 +3,7 @@ package apackage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 
@@ -44,11 +45,13 @@ public class DoverCalaisSearchPage_En {
 	public void selectGoingOutDate(String date) {
 		GoingOutDate.clear();
 		GoingOutDate.sendKeys(date);
+		GoingOutDate.sendKeys(Keys.RETURN);
 	}
 	
 	public void selectComingBackDate(String date) {
 		ComingBackDate.clear();
 		ComingBackDate.sendKeys(date);
+		ComingBackDate.sendKeys(Keys.RETURN);
 	}	
 	
 

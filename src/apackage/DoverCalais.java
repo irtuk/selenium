@@ -10,7 +10,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
@@ -51,55 +54,16 @@ public class DoverCalais {
 		System.out.println("Outbound Date Set");
 		searchPage.selectComingBackDate("21/07/2018");
 		System.out.println("Return Date Set");
-		driver.close();
-					
-	}
-	
-	
-	@Test
-	public void test2() throws InterruptedException {
+		
+		driver.findElement(By.xpath("//*[@id=\"singleJourneyTimeComboBoxSelectBoxItContainer\"]")).click();
+		
+		driver.findElement(By.xpath("//*/li[@data-val = \"80:25\"]")).click();
 
-		searchPage.clickSingleRadioButton();
-		System.out.println("Click!");
-		searchPage.ClickReturnRadioButton();
-		System.out.println("Click!");
-		searchPage.selectGoingOutDate("10/07/2018");
-		System.out.println("Outbound Date Set");
-		searchPage.selectComingBackDate("12/07/2018");
-		System.out.println("Return Date Set");
-		driver.close();
-					
+	
 	}
 	
-	@Test
-	public void test3() throws InterruptedException {
-
-		searchPage.clickSingleRadioButton();
-		System.out.println("Click!");
-		searchPage.ClickReturnRadioButton();
-		System.out.println("Click!");
-		searchPage.selectGoingOutDate("15/07/2018");
-		System.out.println("Outbound Date Set");
-		searchPage.selectComingBackDate("22/07/2018");
-		System.out.println("Return Date Set");
-		driver.close();
-					
-	}
 	
-	@Test
-	public void test4() throws InterruptedException {
 
-		searchPage.clickSingleRadioButton();
-		System.out.println("Click!");
-		searchPage.ClickReturnRadioButton();
-		System.out.println("Click!");
-		searchPage.selectGoingOutDate("16/07/2018");
-		System.out.println("Outbound Date Set");
-		searchPage.selectComingBackDate("23/07/2018");
-		System.out.println("Return Date Set");
-		driver.close();
-					
-	}
 	
 	
 
