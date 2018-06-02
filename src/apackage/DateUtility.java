@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.framework;
+package apackage;
 	
 	import java.text.ParseException;
 	import java.text.SimpleDateFormat;
