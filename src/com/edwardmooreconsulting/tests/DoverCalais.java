@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.poferries;
+package com.edwardmooreconsulting.poferries.tests;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import com.edwardmooreconsulting.poferries.*;
-
+import com.edwardmooreconsulting.framework.*;
 
 public class TestCaseDoverCalais {
 	
@@ -26,7 +25,7 @@ public class TestCaseDoverCalais {
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		
 		searchPage = new DoverCalaisSearchPage_En(driver);
-		
+			
 		
 		
 		driver.manage().window().maximize();
@@ -48,7 +47,10 @@ public class TestCaseDoverCalais {
 
 	@Test
 	public void test() {
-		searchPage.
+		searchPage.clickSingleRadioButton;
+		searchPage.ClickReturnRadioButton;
+		searchPage.selectGoingOutDate("14/08/2018");
+		searchPage.selectComingBackDate("21/08/2018");
 
 	}
 

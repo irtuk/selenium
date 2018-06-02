@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.poferries.timelists;
+package com.edwardmooreconsulting.framework;
 	
 	import java.text.ParseException;
 	import java.text.SimpleDateFormat;

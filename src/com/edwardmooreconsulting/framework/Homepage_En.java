@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.poferries;
+package com.edwardmooreconsulting.framework;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

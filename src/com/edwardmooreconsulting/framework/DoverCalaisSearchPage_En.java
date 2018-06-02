@@ -1,4 +1,4 @@
-package com.edwardmooreconsulting.poferries;
+package com.edwardmooreconsulting.framework;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
