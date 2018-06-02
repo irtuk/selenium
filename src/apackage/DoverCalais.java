@@ -57,7 +57,10 @@ public class DoverCalais {
 		
 		driver.findElement(By.xpath("//*[@id=\"singleJourneyTimeComboBoxSelectBoxItContainer\"]")).click();
 		
-		driver.findElement(By.xpath("//*/li[@data-val = \"80:25\"]")).click();
+		driver.switchTo();
+		
+		
+		
 
 	
 	}
