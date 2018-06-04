@@ -48,7 +48,7 @@ public class DoverCalais {
 	
 	@After
 	public void cleanup() {
-		//driver.close();
+		driver.close();
 		System.out.println("Script terminated");
 	}
 	
