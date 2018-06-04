@@ -30,17 +30,17 @@ public class DoverCalaisSearchPage_En {
 	@FindBy(id="returnJourneyDateTextBox")
 	private WebElement ComingBackDate;
 	
-	@FindBy(id="singleJourneyTimeComboBoxSelectBoxItContainer")
+	@FindBy(id="singleJourneyTimeComboBoxSelectBoxItArrow")
 	private WebElement OutboundTimeList;	
 	
-	@FindBy(id="returnJourneyTimeComboBoxSelectBoxItContainer")
+	@FindBy(id="returnJourneyTimeComboBoxSelectBoxItArrow")
 	private WebElement ReturnTimeList;		
 	
 	//outbound params
-	@FindBy(id="vehicleTypeOutboundComboBoxSelectBoxItContainer")
+	@FindBy(id="vehicleTypeOutboundComboBoxSelectBoxItArrow")
 	private WebElement OutboundVehicleType;
 	
-	@FindBy(id="trailerOutboundComboBoxSelectBoxItContainer")
+	@FindBy(id="trailerOutboundComboBoxSelectBoxItArrow")
 	private WebElement OutboundTrailerType;
 	
 	@FindBy(id="samePassengersCheckBox")
@@ -60,21 +60,27 @@ public class DoverCalaisSearchPage_En {
 
 	@FindBy(id="ou_height")
 	private WebElement outboundVehicleHeight;
+
+	@FindBy(id="ou_trailerLength")
+	private WebElement OutboundTrailerLength;
+
+	@FindBy(id="ou_trailerHeight")
+	private WebElement OutboundTrailerHeight;
 	
 	//Return params
-	@FindBy(id="vehicleTypeReturnComboBoxSelectBoxItContainer")
+	@FindBy(id="vehicleTypeReturnComboBoxSelectBoxItArrow")
 	private WebElement ReturnVehicleType;
 	
-	@FindBy(id="trailerReturnComboBoxSelectBoxItContainer")
+	@FindBy(id="trailerReturnComboBoxSelectBoxItArrow")
 	private WebElement ReturnTrailerType;
 	
-	@FindBy(id="re_AD_pass_comboBox")
+	@FindBy(id="re_AD_pass_comboBoxSelectBoxItArrow")
 	private WebElement ReturnAdultPassengers;
 	
-	@FindBy(id="re_CH_pass_comboBox")
+	@FindBy(id="re_CH_pass_comboBoxSelectBoxItArrow")
 	private WebElement ReturnChildPassengers;
 	
-	@FindBy(id="re_IN_pass_comboBox")
+	@FindBy(id="re_IN_pass_comboBoxSelectBoxItArrow")
 	private WebElement ReturnInfantPassengers;
 	
 	@FindBy(id="re_length")
@@ -85,12 +91,6 @@ public class DoverCalaisSearchPage_En {
 
 	@FindBy(id="discountCodeTextBox")
 	private WebElement DiscountCode;
-
-	@FindBy(id="ou_trailerLength")
-	private WebElement OutboundTrailerLength;
-
-	@FindBy(id="ou_trailerHeight")
-	private WebElement OutboundTrailerHeight;
 	
 	@FindBy(id="re_trailerLength")
 	private WebElement ReturnTrailerLength;
@@ -167,14 +167,40 @@ public class DoverCalaisSearchPage_En {
 	
 	public void selectReturnVehicle(String vehicleType) {
 		System.out.println("Setting a return vehicle type of " + vehicleType);
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		js.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.id("fareFindersubmitButton")));
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItContainer")));		
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItContainer")));	
 		ReturnVehicleType.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions")));
-		driver.findElement(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(vehicleType)).click();		
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions")));
+
+		switch (vehicleType) {
+			case "smallCar" :
+					System.out.println("Switching small car");
+					driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[1]")).click();
+			case "mediumCar" :
+				System.out.println("Switching med car");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[2]")).click();
+			case "largeCar" :
+				System.out.println("Switching big car");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[3]")).click();
+			case "van" :
+				System.out.println("Switching van");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[4]")).click();
+			case "motorcycle" :
+				System.out.println("Switching motorbike");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[5]")).click();
+			case "minibus" :
+				System.out.println("Switching minibus");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[6]")).click();				                             				
+			case "motorhome" :
+				System.out.println("Switching motorhome");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[7]")).click();
+			case "bicycle" :
+				System.out.println("Switching bike");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[8]")).click();
+			case "Motorcycle with sidecar" :
+				System.out.println("Switching sidecar");
+				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[9]")).click();
+			}
 	}	
 	
 	public void selectOutboundTrailer(String trailerType) {
@@ -197,7 +223,8 @@ public class DoverCalaisSearchPage_En {
 		OutboundTrailerType.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerReturnComboBoxSelectBoxItOptions")));
 		driver.findElement(By.id("trailerReturnComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(trailerType)).click();
+		//driver.findElement(By.linkText(trailerType)).click();
+
 		
 	}
 	
