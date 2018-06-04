@@ -16,6 +16,8 @@ public class DoverCalais {
 	private static String baseURL ;
 	private static DoverCalaisSearchPage_En Toolbox;	
 	
+	
+	
 
 	@Before
 	public void Before() throws Exception {
@@ -43,6 +45,11 @@ public class DoverCalais {
 		Toolbox.selectComingBackDate("21/07/2018");		
 		Toolbox.selectOutboundSailing("12:55");		
 		Toolbox.selectReturnSailing("14:20");
+		Toolbox.selectOutboundVehicle("Car ≤ 1.8m h & ≤ 6m l");
+		Toolbox.selectOutboundVehicle("Car 1.8 - 2.4m h & ≤ 6 m l");
+		Toolbox.selectOutboundVehicle("Car > 2.4m h & / or > 6m l");
+
+		
 	}
 	
 	
@@ -53,7 +60,12 @@ public class DoverCalais {
 	}
 	
 
-	
+//	Car ≤ 1.8m h & ≤ 6m l
+//	Car 1.8 - 2.4m h & ≤ 6 m l
+//	Car > 2.4m h & / or > 6m l
+//	Van
+//	Motorcycle
+//	Minibus
 	
 
 }
