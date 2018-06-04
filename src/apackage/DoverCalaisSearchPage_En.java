@@ -6,84 +6,99 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+
 
 
 public class DoverCalaisSearchPage_En {
 	
 	WebDriver driver;	
+	JavascriptExecutor js = (JavascriptExecutor) driver;
 	
 	//Journey Type
 	@FindBy(id="singleJourneyRadio")
-	WebElement OneWayRadioButton;
+	private WebElement OneWayRadioButton;
 	
 	@FindBy(id="returnJourneyRadio")
-	WebElement ReturnJourneyRadioButton;
+	private WebElement ReturnJourneyRadioButton;
 	
 	@FindBy(id="singleJourneyDateTextBox")
-	WebElement GoingOutDate;
+	private WebElement GoingOutDate;
 
 	@FindBy(id="returnJourneyDateTextBox")
-	WebElement ComingBackDate;
+	private WebElement ComingBackDate;
 	
 	@FindBy(id="singleJourneyTimeComboBoxSelectBoxItContainer")
-	WebElement OutboundTimeList;	
+	private WebElement OutboundTimeList;	
 	
 	@FindBy(id="returnJourneyTimeComboBoxSelectBoxItContainer")
-	WebElement ReturnTimeList;		
+	private WebElement ReturnTimeList;		
 	
 	//outbound params
 	@FindBy(id="vehicleTypeOutboundComboBoxSelectBoxItContainer")
-	WebElement OutboundVehicleType;
+	private WebElement OutboundVehicleType;
 	
 	@FindBy(id="trailerOutboundComboBoxSelectBoxItContainer")
-	WebElement OutboundTrailerType;
+	private WebElement OutboundTrailerType;
 	
 	@FindBy(id="samePassengersCheckBox")
-	WebElement SamePassengersCheckbox;
+	private WebElement SamePassengersCheckbox;
 	
-	@FindBy(id="ou_AD_pass_comboBoxSelectBoxItContainer")
-	WebElement OutboundAdultPassengers;
+	@FindBy(id="ou_AD_pass_comboBoxSelectBoxItArrow")
+	private WebElement OutboundAdultPassengers;
 	
-	@FindBy(id="ou_CH_pass_comboBoxSelectBoxItContainer")
-	WebElement OutboundChildPassengers;
+	@FindBy(id="ou_CH_pass_comboBoxSelectBoxItArrow")
+	private WebElement OutboundChildPassengers;
 	
-	@FindBy(id="ou_IN_pass_comboBoxSelectBoxItContainer")
-	WebElement OutboundInfantPassengers;
+	@FindBy(id="ou_IN_pass_comboBoxSelectBoxItArrow")
+	private WebElement OutboundInfantPassengers;
 	
 	@FindBy(id="ou_length")
-	WebElement outboundVehicleLength;
+	private WebElement outboundVehicleLength;
 
 	@FindBy(id="ou_height")
-	WebElement outboundVehicleHeight;
+	private WebElement outboundVehicleHeight;
 	
 	//Return params
 	@FindBy(id="vehicleTypeReturnComboBoxSelectBoxItContainer")
-	WebElement ReturnVehicleType;
+	private WebElement ReturnVehicleType;
 	
 	@FindBy(id="trailerReturnComboBoxSelectBoxItContainer")
-	WebElement ReturnTrailerType;
+	private WebElement ReturnTrailerType;
 	
-	@FindBy(id="re_AD_pass_comboBoxSelectBoxItContainer")
-	WebElement ReturnAdultPassengers;
+	@FindBy(id="re_AD_pass_comboBox")
+	private WebElement ReturnAdultPassengers;
 	
-	@FindBy(id="re_CH_pass_comboBoxSelectBoxItContainer")
-	WebElement ReturnChildPassengers;
+	@FindBy(id="re_CH_pass_comboBox")
+	private WebElement ReturnChildPassengers;
 	
-	@FindBy(id="re_IN_pass_comboBoxSelectBoxItContainer")
-	WebElement ReturnInfantPassengers;
+	@FindBy(id="re_IN_pass_comboBox")
+	private WebElement ReturnInfantPassengers;
 	
 	@FindBy(id="re_length")
-	WebElement returnVehicleLength;
+	private WebElement ReturnVehicleLength;
 
 	@FindBy(id="re_height")
-	WebElement returnVehicleHeight;
+	private WebElement ReturnVehicleHeight;
 
 	@FindBy(id="discountCodeTextBox")
-	WebElement discountCode;
+	private WebElement DiscountCode;
+
+	@FindBy(id="ou_trailerLength")
+	private WebElement OutboundTrailerLength;
+
+	@FindBy(id="ou_trailerHeight")
+	private WebElement OutboundTrailerHeight;
 	
-	
+	@FindBy(id="re_trailerLength")
+	private WebElement ReturnTrailerLength;
+
+	@FindBy(id="re_trailerHeight")
+	private WebElement ReturnTrailerHeight;	
+
+
 	
 	//initialize the elements using the selenium PageFactory method
 	public DoverCalaisSearchPage_En(WebDriver driver) {
@@ -92,7 +107,7 @@ public class DoverCalaisSearchPage_En {
 		System.out.println("Should have just initialized the Dover Calais page search factory");		
 	}
 	
-	//methods
+	//expose public methods
 	public void clickSingleTripRadioButton() {
 		System.out.println("Selecting one way radio button");
 		OneWayRadioButton.click();
@@ -150,6 +165,18 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.linkText(vehicleType)).click();		
 	}
 	
+	public void selectReturnVehicle(String vehicleType) {
+		System.out.println("Setting a return vehicle type of " + vehicleType);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		js.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.id("fareFindersubmitButton")));
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItContainer")));		
+		ReturnVehicleType.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions")));
+		driver.findElement(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions"));
+		driver.findElement(By.linkText(vehicleType)).click();		
+	}	
+	
 	public void selectOutboundTrailer(String trailerType) {
 		System.out.println("Setting an outbound trailer type of " + trailerType);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -161,33 +188,43 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.linkText(trailerType)).click();
 		
 	}
+		
+	public void selectReturnTrailer(String trailerType) {
+		System.out.println("Setting a return trailer type of " + trailerType);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerReturnComboBoxSelectBoxItContainer")));		
+		OutboundTrailerType.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerReturnComboBoxSelectBoxItOptions")));
+		driver.findElement(By.id("trailerReturnComboBoxSelectBoxItOptions"));
+		driver.findElement(By.linkText(trailerType)).click();
+		
+	}
 	
 	public void selectOutboundVehicleHeight(String height) {
 		System.out.println("Setting an outbound vehicle height of " + height );
 		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_height")));	
 		outboundVehicleHeight.click();
-		outboundVehicleHeight.sendKeys(height);
-		
+		outboundVehicleHeight.sendKeys(height);		
 	}
 	
 	public void selectOutboundVehicleLength(String length) {
 		System.out.println("Setting an outbound vehicle length of " + length );
 		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_length")));	
 		outboundVehicleLength.click();
-		outboundVehicleLength.sendKeys(length);
-
-
-		
+		outboundVehicleLength.sendKeys(length);		
 	}
 
 	public void selectReturnVehicleHeight(String height) {
 		System.out.println("Setting an outbound vehicle height of " + height );
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_height")));	
-		returnVehicleHeight.click();
-		returnVehicleHeight.sendKeys(height);
+		ReturnVehicleHeight.click();
+		ReturnVehicleHeight.sendKeys(height);
 		
 	}
 	
@@ -195,45 +232,139 @@ public class DoverCalaisSearchPage_En {
 		System.out.println("Setting an outbound vehicle height of " + length );
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_length")));	
-		returnVehicleLength.click();
-		returnVehicleLength.sendKeys(length);
+		ReturnVehicleLength.click();
+		ReturnVehicleLength.sendKeys(length);
 	}
 
 	public void selectOutboundAdults(String adults)	{	
 		System.out.println("Setting number of adults to " + adults);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxIt")));		
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxItContainer")));		
 		OutboundAdultPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("ou_AD_pass_comboBoxSelectBoxItOptions"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxItOptions")));
 		driver.findElement(By.linkText(adults)).click();
 	}
 	
 	public void selectOutboundChildren(String children) {
 		System.out.println("Setting number of children to " + children);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxIt")));		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxItContainer")));		
 		OutboundChildPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("ou_CH_pass_comboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(children)).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxItOptions")));
+		children = nastyChildXpathHack(children);
+		driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[" + children + "]")).click();
 	}
 	
 	public void selectOutboundInfants(String infants) {	
 		System.out.println("Setting number of infants to " + infants);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxIt")));		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
 		OutboundInfantPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("ou_IN_pass_comboBoxSelectBoxItOptions"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		infants = nastyChildXpathHack(infants);
+		driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[" + infants + "]")).click();
+
+	}
+	
+	public void selectReturnAdults(String adults)	{	
+		System.out.println("Setting number of returning adults to " + adults);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));		
+		ReturnAdultPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));
+		driver.findElement(By.id("re_AD_pass_comboBoxSelectBoxItOptions"));
+		driver.findElement(By.linkText(adults)).click();
+	}
+	
+	public void selectReturnChildren(String children) {
+		System.out.println("Setting number of returning children to " + children);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_CH_pass_comboBoxSelectBoxIt")));		
+		ReturnChildPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_CH_pass_comboBoxSelectBoxIt")));
+		driver.findElement(By.id("re_CH_pass_comboBoxSelectBoxItOptions"));
+		driver.findElement(By.linkText(children)).click();
+	}
+	
+	public void selectReturnInfants(String infants) {	
+		System.out.println("Setting number of returning infants to " + infants);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxIt")));		
+		OutboundInfantPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxIt")));
+		driver.findElement(By.id("re_IN_pass_comboBoxSelectBoxItOptions"));
 		driver.findElement(By.linkText(infants)).click();
 	}
+	
+	public void selectOutboundTrailerHeight(String height) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		System.out.println("Setting an outbound Trailer height of " + height );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerHeight")));	
+		OutboundTrailerHeight.click();
+		OutboundTrailerHeight.sendKeys(height);		
+	}
+	
+	public void selectOutboundTrailerLength(String length) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		System.out.println("Setting an outbound Trailer length of " + length );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerLength")));	
+		OutboundTrailerLength.click();
+		OutboundTrailerLength.sendKeys(length);		
+	}
+	
+	public void selectReturnTrailerHeight(String height) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));		
+		System.out.println("Setting an outbound Trailer height of " + height );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerHeight")));	
+		ReturnTrailerHeight.click();
+		ReturnTrailerHeight.sendKeys(height);		
+	}
+	
+	public void selectReturnTrailerLength(String length) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		System.out.println("Setting an outbound Trailer length of " + length );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerLength")));	
+		ReturnTrailerLength.click();
+		ReturnTrailerLength.sendKeys(length);		
+	}
+	
+	public void CheckSamePassengersCheckbox() {
+		
+		if (SamePassengersCheckbox.isSelected()) {
+			System.out.println("Checkbox already checked. Taking no action");
+		} else {
+		System.out.println("Checkbox not already checked. Clicking it");
+		SamePassengersCheckbox.click();
+		}
+		
+	}
+	
+	public void UncheckSamePassengersCheckbox() {
+		if (SamePassengersCheckbox.isSelected()) {
+			System.out.println("Checkbox checked. Clicking it.");
+			SamePassengersCheckbox.click();
+		} else {
+		System.out.println("Checkbox not already checked. Taking no action.");
 
+		}
 
+	}
 
+	private String nastyChildXpathHack(String children) {
+		System.out.println("Hacking xpath together. This procedure should be taken outside and shot as soon as possible...");
+		int modifiedChildren = Integer.parseInt(children);
+		modifiedChildren = modifiedChildren +1;
+		String retval = String.valueOf(modifiedChildren);
+		return retval;			
+	}
 
 
 
