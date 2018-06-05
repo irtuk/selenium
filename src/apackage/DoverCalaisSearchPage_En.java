@@ -240,14 +240,17 @@ public class DoverCalaisSearchPage_En {
 	}
 
 	public void selectOutboundAdults(String adults)	{	
+		String xpath = null;
+		String objectType = "outboundAdults";
 		System.out.println("Setting number of adults to " + adults);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxItContainer")));		
 		OutboundAdultPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_AD_pass_comboBoxSelectBoxItOptions")));
-		driver.findElement(By.linkText(adults)).click();
-	}
+		xpath = xpathBuilder(objectType, adults);
+		driver.findElement(By.xpath(xpath)).click();
+		}
 	
 	public void selectOutboundChildren(String children) {
 		System.out.println("Setting number of children to " + children);
@@ -271,14 +274,17 @@ public class DoverCalaisSearchPage_En {
 	}
 	
 	public void selectReturnAdults(String adults)	{	
+		String xpath = null;
+		String objectType = "returningAdults";		
 		System.out.println("Setting number of returning adults to " + adults);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));		
 		ReturnAdultPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));
 		driver.findElement(By.id("re_AD_pass_comboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(adults)).click();
+		xpath = xpathBuilder (objectType, adults);
+		driver.findElement(By.xpath(xpath)).click();		
+		
 	}
 	
 	public void selectReturnChildren(String children) {
@@ -370,6 +376,9 @@ public class DoverCalaisSearchPage_En {
 	}
 
 	private String xpathBuilder ( String objectType, String objectDetail) {
+		// I really don't like this solution, it feels very vulnerable to breaking down
+		// however the javascript drop down boxes respond differently all the time
+		// hitting the xpath not the value seems to be the only reliable way to do this right now.
 		
 		String returnXpath=null;
 		System.out.println("Using xPath builder");
@@ -428,49 +437,49 @@ public class DoverCalaisSearchPage_En {
 		case "returnVehicle":
 			switch (objectDetail) {
 			
-			case "Car ≤ 1.8m h & ≤ 6m l":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[1]";
-				break;
-			
-			case "Car 1.8 - 2.4m h & ≤ 6 m l":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[2]";
-				break;
-			
-			case "Car > 2.4m h & / or > 6m l":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[3]";
-				break;
-			
-			case "Van":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[4]";
-				break;
-			
-			case "Motorcycle":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[5]";
-				break;
-			
-			case "Minibus":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[6]";
-				break;
-			
-			case "Motorhome":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[7]";
-				break;
-			
-			case "Bicycle":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[8]";
-				break;
+				case "Car ≤ 1.8m h & ≤ 6m l":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[1]";
+					break;
 				
-			case "Motorcycle with sidecar":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[9]";
-				break;
+				case "Car 1.8 - 2.4m h & ≤ 6 m l":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[2]";
+					break;
 				
-			case "No Vehicle (Foot Passenger)":
-				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[10]";
-				break;
-			
-			default:
-				System.out.println("Automation error. no recognised return vehicle");
-				break;
+				case "Car > 2.4m h & / or > 6m l":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[3]";
+					break;
+				
+				case "Van":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[4]";
+					break;
+				
+				case "Motorcycle":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[5]";
+					break;
+				
+				case "Minibus":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[6]";
+					break;
+				
+				case "Motorhome":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[7]";
+					break;
+				
+				case "Bicycle":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[8]";
+					break;
+					
+				case "Motorcycle with sidecar":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[9]";
+					break;
+					
+				case "No Vehicle (Foot Passenger)":
+					returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[10]";
+					break;
+				
+				default:
+					System.out.println("Automation error. no recognised return vehicle");
+					break;
 			}
 
 			break;
@@ -494,25 +503,101 @@ public class DoverCalaisSearchPage_En {
 		
 		case "returnTrailer":
 			switch (objectDetail) {
-			case "No trailer / Caravan":
-				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[1]";
-				break;
-			case "Trailer ≤ 1.8m h & ≤ 6m l":
-				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[2]";
-				break;
-			case "Trailer / Caravan > 1.8m h or > 6m l":
-				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[3]";
-				break;	
-			default:
-				System.out.println("Automation error. no recognised return trailer");
-				break;				
+				case "No trailer / Caravan":
+					returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[1]";
+					break;
+				case "Trailer ≤ 1.8m h & ≤ 6m l":
+					returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[2]";
+					break;
+				case "Trailer / Caravan > 1.8m h or > 6m l":
+					returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[3]";
+					break;	
+				default:
+					System.out.println("Automation error. no recognised return trailer");
+					break;				
 			}
 			break;
 			
 		case "outboundAdults":
+			switch (objectDetail) {
+
+				case "0":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[1]";
+					break;
+				case "1":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[2]";
+					break;
+				case "2":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[3]";
+					break;
+				case "3":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[4]";
+					break;
+				case "4":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[5]";
+					break;
+				case "5":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[6]";
+					break;
+				case "6":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[7]";
+					break;
+				case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[8]";
+					break;
+				case "8":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[9]";
+					break;
+				case "9":
+					returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[10]";
+					break;
+				default:
+					System.out.println("Automation error: could not determine nummber of outbound adult passengers");
+					break;				
+			
+			
+			}
 			break;
 		
 		case "returnAdults":
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[1]\";";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[2]\";";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[3]\";";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[4]\";";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[5]\";";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[6]\";";
+				break;
+			case "6":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[7]\";";
+				break;
+			case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[8]\";";
+				break;
+			case "8":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[9]\";";
+				break;
+			case "9":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[10]\";";
+				break;
+			default:
+				System.out.println("Automation error: could not determine nummber of returning adult passengers");
+				break;				
+		
+		
+		}
 			break;
 		
 		case "outboundChildren":
