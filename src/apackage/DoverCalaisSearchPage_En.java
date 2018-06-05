@@ -97,9 +97,7 @@ public class DoverCalaisSearchPage_En {
 
 	@FindBy(id="re_trailerHeight")
 	private WebElement ReturnTrailerHeight;	
-
-
-	
+		
 	//initialize the elements using the selenium PageFactory method
 	public DoverCalaisSearchPage_En(WebDriver driver) {
 		this.driver = driver;
@@ -155,6 +153,7 @@ public class DoverCalaisSearchPage_En {
 	}
 	
 	public void selectOutboundVehicle(String vehicleType) {
+		String objectType = "outboundVehicle";
 		System.out.println("Setting an outbound vehicle type of " + vehicleType);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
@@ -162,48 +161,25 @@ public class DoverCalaisSearchPage_En {
 		OutboundVehicleType.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeOutboundComboBoxSelectBoxItOptions")));
 		driver.findElement(By.id("vehicleTypeOutboundComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(vehicleType)).click();		
+		String xpath = xpathBuilder(objectType, vehicleType);
+		driver.findElement(By.xpath(xpath)).click();
+		
 	}
 	
 	public void selectReturnVehicle(String vehicleType) {
+		String objectType = "returnVehicle";
 		System.out.println("Setting a return vehicle type of " + vehicleType);
-		//WebDriverWait wait = new WebDriverWait(driver, 10);
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItContainer")));	
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItContainer")));	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItArrow")));
 		ReturnVehicleType.click();
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions")));
-
-		switch (vehicleType) {
-			case "smallCar" :
-					System.out.println("Switching small car");
-					driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[1]")).click();
-			case "mediumCar" :
-				System.out.println("Switching med car");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[2]")).click();
-			case "largeCar" :
-				System.out.println("Switching big car");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[3]")).click();
-			case "van" :
-				System.out.println("Switching van");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[4]")).click();
-			case "motorcycle" :
-				System.out.println("Switching motorbike");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[5]")).click();
-			case "minibus" :
-				System.out.println("Switching minibus");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[6]")).click();				                             				
-			case "motorhome" :
-				System.out.println("Switching motorhome");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[7]")).click();
-			case "bicycle" :
-				System.out.println("Switching bike");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[8]")).click();
-			case "Motorcycle with sidecar" :
-				System.out.println("Switching sidecar");
-				driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[9]")).click();
-			}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("vehicleTypeReturnComboBoxSelectBoxItOptions")));
+		String xpath = xpathBuilder(objectType, vehicleType);
+		driver.findElement(By.xpath(xpath)).click();
 	}	
 	
 	public void selectOutboundTrailer(String trailerType) {
+		String objectType = "outboundTrailer";
 		System.out.println("Setting an outbound trailer type of " + trailerType);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
@@ -211,21 +187,21 @@ public class DoverCalaisSearchPage_En {
 		OutboundTrailerType.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerOutboundComboBoxSelectBoxItOptions")));
 		driver.findElement(By.id("trailerOutboundComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(trailerType)).click();
-		
+		String xpath = xpathBuilder(objectType, trailerType);
+		driver.findElement(By.xpath(xpath)).click();				
 	}
 		
 	public void selectReturnTrailer(String trailerType) {
+		String objectType = "returnTrailer";
 		System.out.println("Setting a return trailer type of " + trailerType);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerReturnComboBoxSelectBoxItContainer")));		
-		OutboundTrailerType.click();
+		ReturnTrailerType.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("trailerReturnComboBoxSelectBoxItOptions")));
 		driver.findElement(By.id("trailerReturnComboBoxSelectBoxItOptions"));
-		//driver.findElement(By.linkText(trailerType)).click();
-
-		
+		String xpath = xpathBuilder(objectType, trailerType);
+		driver.findElement(By.xpath(xpath)).click();	
 	}
 	
 	public void selectOutboundVehicleHeight(String height) {
@@ -348,8 +324,8 @@ public class DoverCalaisSearchPage_En {
 	public void selectReturnTrailerHeight(String height) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));		
-		System.out.println("Setting an outbound Trailer height of " + height );
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerHeight")));	
+		System.out.println("Setting a return Trailer height of " + height );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_trailerHeight")));	
 		ReturnTrailerHeight.click();
 		ReturnTrailerHeight.sendKeys(height);		
 	}
@@ -357,8 +333,8 @@ public class DoverCalaisSearchPage_En {
 	public void selectReturnTrailerLength(String length) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
-		System.out.println("Setting an outbound Trailer length of " + length );
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_trailerLength")));	
+		System.out.println("Setting a return Trailer length of " + length );
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_trailerLength")));	
 		ReturnTrailerLength.click();
 		ReturnTrailerLength.sendKeys(length);		
 	}
@@ -393,6 +369,170 @@ public class DoverCalaisSearchPage_En {
 		return retval;			
 	}
 
+	private String xpathBuilder ( String objectType, String objectDetail) {
+		
+		String returnXpath=null;
+		System.out.println("Using xPath builder");
+		
+		switch (objectType) {
+		case "outboundVehicle":
+			switch (objectDetail) {
+			
+			case "Car ≤ 1.8m h & ≤ 6m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[1]";
+				break;
+			
+			case "Car 1.8 - 2.4m h & ≤ 6 m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[2]";
+				break;
+			
+			case "Car > 2.4m h & / or > 6m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[3]";
+				break;
+			
+			case "Van":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[4]";
+				break;
+			
+			case "Motorcycle":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[5]";
+				break;
+			
+			case "Minibus":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[6]";
+				break;
+			
+			case "Motorhome":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[7]";
+				break;
+			
+			case "Bicycle":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[8]";
+				break;
+				
+			case "Motorcycle with sidecar":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[9]";
+				break;
+				
+			case "No Vehicle (Foot Passenger)":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[1]/span[2]/ul/li[10]";
+				break;
+			
+			default:
+				System.out.println("Automation error. no recognised outbound vehicle");
+				break;
+			}
 
+			break;
+		
+		case "returnVehicle":
+			switch (objectDetail) {
+			
+			case "Car ≤ 1.8m h & ≤ 6m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[1]";
+				break;
+			
+			case "Car 1.8 - 2.4m h & ≤ 6 m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[2]";
+				break;
+			
+			case "Car > 2.4m h & / or > 6m l":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[3]";
+				break;
+			
+			case "Van":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[4]";
+				break;
+			
+			case "Motorcycle":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[5]";
+				break;
+			
+			case "Minibus":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[6]";
+				break;
+			
+			case "Motorhome":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[7]";
+				break;
+			
+			case "Bicycle":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[8]";
+				break;
+				
+			case "Motorcycle with sidecar":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[9]";
+				break;
+				
+			case "No Vehicle (Foot Passenger)":
+				returnXpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[1]/span[2]/ul/li[10]";
+				break;
+			
+			default:
+				System.out.println("Automation error. no recognised return vehicle");
+				break;
+			}
 
+			break;
+		
+		case "outboundTrailer":
+			switch (objectDetail) {
+			case "No trailer / Caravan":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[3]/span[2]/ul/li[1]";
+				break;
+			case "Trailer ≤ 1.8m h & ≤ 6m l":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[3]/span[2]/ul/li[2]";
+				break;
+			case "Trailer / Caravan > 1.8m h or > 6m l":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[3]/dd[3]/span[2]/ul/li[3]";
+				break;	
+			default:
+				System.out.println("Automation error. no recognised outbound trailer");
+				break;				
+			}
+			break;
+		
+		case "returnTrailer":
+			switch (objectDetail) {
+			case "No trailer / Caravan":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[1]";
+				break;
+			case "Trailer ≤ 1.8m h & ≤ 6m l":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[2]";
+				break;
+			case "Trailer / Caravan > 1.8m h or > 6m l":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[6]/dd[3]/span[2]/ul/li[3]";
+				break;	
+			default:
+				System.out.println("Automation error. no recognised return trailer");
+				break;				
+			}
+			break;
+			
+		case "outboundAdults":
+			break;
+		
+		case "returnAdults":
+			break;
+		
+		case "outboundChildren":
+			break;
+			
+		case "returnChildren":
+			break;
+			
+		case "outboundInfant":
+			break;
+			
+		case "returnInfant":
+			break;
+			
+			
+		
+		
+		}		
+		
+	return returnXpath;
+	}
+	
 }

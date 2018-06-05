@@ -59,7 +59,7 @@ public class DoverCalais {
 //		Searchpage.selectComingBackDate("21/07/2018");		
 //		Searchpage.selectOutboundSailing("12:55");		
 //		Searchpage.selectReturnSailing("14:20");
-//		Searchpage.selectOutboundVehicle(van);
+		Searchpage.selectOutboundVehicle(van);
 //		Searchpage.selectOutboundVehicleHeight("2.0");
 //		Searchpage.selectOutboundVehicleLength("3.0");		
 //		Searchpage.selectOutboundTrailer(largeTrailer);
@@ -68,13 +68,8 @@ public class DoverCalais {
 //		Searchpage.selectOutboundAdults("3");
 //		Searchpage.selectOutboundChildren("3");
 //		Searchpage.selectOutboundInfants("3");
-
 		Searchpage.UncheckSamePassengersCheckbox();		
-		Searchpage.selectReturnVehicle(van);
-		Searchpage.selectReturnVehicle(smallCar);
-		Searchpage.selectReturnVehicle(mediumCar);
 		Searchpage.selectReturnVehicle(largeCar);
-		
 //		Searchpage.selectReturnVehicleHeight("3.0");
 //		Searchpage.selectReturnVehicleLength("2.0");		
 //		Searchpage.selectReturnTrailer(largeTrailer);
