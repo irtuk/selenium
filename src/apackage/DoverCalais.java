@@ -65,7 +65,7 @@ public class DoverCalais {
 //		Searchpage.selectOutboundTrailer(largeTrailer);
 //		Searchpage.selectOutboundTrailerHeight("1.0");
 //		Searchpage.selectOutboundTrailerLength("4.0");
-//		Searchpage.selectOutboundAdults("3");
+		Searchpage.selectOutboundAdults("3");
 //		Searchpage.selectOutboundChildren("3");
 //		Searchpage.selectOutboundInfants("3");
 		Searchpage.UncheckSamePassengersCheckbox();		
@@ -75,7 +75,7 @@ public class DoverCalais {
 //		Searchpage.selectReturnTrailer(largeTrailer);
 //		Searchpage.selectReturnTrailerHeight("3.0");
 //		Searchpage.selectReturnTrailerLength("6.0");
-//		Searchpage.selectReturnAdults("4");
+		Searchpage.selectReturnAdults("4");
 //		Searchpage.selectReturnChildren("4");
 //		Searchpage.selectReturnInfants("4");		
 	}

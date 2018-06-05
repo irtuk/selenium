@@ -278,12 +278,19 @@ public class DoverCalaisSearchPage_En {
 		String objectType = "returningAdults";		
 		System.out.println("Setting number of returning adults to " + adults);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxItContainer")));		
 		ReturnAdultPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("re_AD_pass_comboBoxSelectBoxItOptions"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxItOptions")));		
 		xpath = xpathBuilder (objectType, adults);
-		driver.findElement(By.xpath(xpath)).click();		
+		try {
+			System.out.println("trying the xpath click");
+			driver.findElement(By.xpath(xpath)).click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("xpath click apparently failed trying the linktext click");
+			driver.findElement(By.linkText(adults)).click();
+		}		
 		
 	}
 	
@@ -559,38 +566,38 @@ public class DoverCalaisSearchPage_En {
 			}
 			break;
 		
-		case "returnAdults":
+		case "returningAdults":
 			switch (objectDetail) {
 
 			case "0":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[1]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[1]";
 				break;
 			case "1":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[2]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[2]";
 				break;
 			case "2":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[3]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[3]";
 				break;
 			case "3":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[4]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[4]";
 				break;
 			case "4":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[5]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[5]";
 				break;
 			case "5":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[6]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[6]";
 				break;
 			case "6":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[7]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[7]";
 				break;
 			case "7":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[8]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[8]";
 				break;
 			case "8":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[9]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[9]";
 				break;
 			case "9":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[1]/li[2]/span/ul/li[10]\";";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[10]";
 				break;
 			default:
 				System.out.println("Automation error: could not determine nummber of returning adult passengers");
@@ -611,9 +618,9 @@ public class DoverCalaisSearchPage_En {
 			
 		case "returnInfant":
 			break;
-			
-			
-		
+		default:
+				System.out.println("Automation Error: could not determine the type of object being passed into the xpath builder, trailer, car, passenger type etc.");
+				break;
 		
 		}		
 		
