@@ -253,29 +253,33 @@ public class DoverCalaisSearchPage_En {
 	}
 
 	public void selectOutboundChildren(String children) {
+		String xpath = null;
+		String objectType = "outboundChildren";
 		System.out.println("Setting number of children to " + children);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxItContainer")));		
 		OutboundChildPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_CH_pass_comboBoxSelectBoxItOptions")));
-		children = nastyChildXpathHack(children);
-		driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[" + children + "]")).click();
+		xpath = xpathBuilder(objectType, children);
+		driver.findElement(By.xpath(xpath)).click();
+		
 	}
 
 	public void selectOutboundInfants(String infants) {	
+		String xpath = null;
+		String objectType = "outboundInfants";
 		System.out.println("Setting number of infants to " + infants);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
 		OutboundInfantPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
-		infants = nastyChildXpathHack(infants);
-		driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[" + infants + "]")).click();
-
+		xpath = xpathBuilder(objectType, infants);
+		driver.findElement(By.xpath(xpath)).click();
 	}
 
 	public void selectReturnAdults(String adults)	{	
 		String xpath = null;
-		String objectType = "returningAdults";		
+		String objectType = "returnAdults";		
 		System.out.println("Setting number of returning adults to " + adults);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_AD_pass_comboBoxSelectBoxItContainer")));		
@@ -295,25 +299,52 @@ public class DoverCalaisSearchPage_En {
 	}
 
 	public void selectReturnChildren(String children) {
+		String xpath = null;
+		String objectType = "returnChildren";	
 		System.out.println("Setting number of returning children to " + children);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_CH_pass_comboBoxSelectBoxIt")));		
 		ReturnChildPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_CH_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("re_CH_pass_comboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(children)).click();
+		xpath = xpathBuilder(objectType, children);
+		driver.findElement(By.xpath(xpath)).click();		
 	}
 
 	public void selectReturnInfants(String infants) {	
-		System.out.println("Setting number of returning infants to " + infants);
+		String xpath = null;
+		String objectType = "returnInfants";
+		System.out.println("Setting number of infants to " + infants);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxIt")));		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
 		OutboundInfantPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxIt")));
-		driver.findElement(By.id("re_IN_pass_comboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(infants)).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		xpath = xpathBuilder(objectType, infants);
+		driver.findElement(By.xpath(xpath)).click();
+	}
+	
+	public void selectOutboundPets(String pets) {	
+		String xpath = null;
+		String objectType = "outboundPets";
+		System.out.println("Setting number of infants to " + pets);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
+		OutboundInfantPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		xpath = xpathBuilder(objectType, pets);
+		driver.findElement(By.xpath(xpath)).click();
+	}
+	
+	public void selectReturnPets(String pets) {	
+		String xpath = null;
+		String objectType = "returnPets";
+		System.out.println("Setting number of infants to " + pets);
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
+		OutboundInfantPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		xpath = xpathBuilder(objectType, pets);
+		driver.findElement(By.xpath(xpath)).click();
 	}
 
 	public void selectOutboundTrailerHeight(String height) {
@@ -372,14 +403,6 @@ public class DoverCalaisSearchPage_En {
 
 		}
 
-	}
-
-	private String nastyChildXpathHack(String children) {
-		System.out.println("Hacking xpath together. This procedure should be taken outside and shot as soon as possible...");
-		int modifiedChildren = Integer.parseInt(children);
-		modifiedChildren = modifiedChildren +1;
-		String retval = String.valueOf(modifiedChildren);
-		return retval;			
 	}
 
 	private String xpathBuilder ( String objectType, String objectDetail) {
@@ -566,7 +589,7 @@ public class DoverCalaisSearchPage_En {
 			}
 			break;
 
-		case "returningAdults":
+		case "returnAdults":
 			switch (objectDetail) {
 
 			case "0":
@@ -608,16 +631,213 @@ public class DoverCalaisSearchPage_En {
 			break;
 
 		case "outboundChildren":
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[1]";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[6]";
+				break;
+			case "6":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[7]";
+				break;
+			case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[8]";
+				break;
+			case "8":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[9]";
+				break;
+			case "9":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[2]/li[2]/span/ul/li[10]";
+				break;
+			default:
+				System.out.println("Automation error: could not determine nummber of outbound child passengers");
+				break;
+				}
 			break;
 
 		case "returnChildren":
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[1]";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[6]";
+				break;
+			case "6":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[7]";
+				break;
+			case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[8]";
+				break;
+			case "8":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[9]";
+				break;
+			case "9":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[2]/li[2]/span/ul/li[10]";
+				break;
+			default:
+				System.out.println("Automation error: could not determine nummber of returning child passengers");
+				break;
+				}
+			
 			break;
 
-		case "outboundInfant":
+		case "outboundInfants":
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[1]";
+				//              /html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[1]
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[6]";
+				break;
+			case "6":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[7]";
+				break;
+			case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[8]";
+				break;
+			case "8":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[9]";
+				break;
+			case "9":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[3]/li[2]/span/ul/li[10]";
+				break;
+			default:
+				System.out.println("Automation error: could not determine nummber of outbound infant passengers");
+				break;
+				}
 			break;
 
-		case "returnInfant":
+		case "returnInfants":
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[1]";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[6]";
+				break;
+			case "6":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[7]";
+				break;
+			case "7":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[8]";
+				break;
+			case "8":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[9]";
+				break;
+			case "9":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[3]/li[2]/span/ul/li[10]";
+				break;
+			default:
+				System.out.println("Automation error: could not determine nummber of outbound infant passengers");
+				break;
+				}			
 			break;
+			
+		case "outboundPets":
+			///html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[6]";
+				break;
+				}	
+			break;
+			
+		case "returnPets":
+			///html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[1]
+			switch (objectDetail) {
+
+			case "0":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[1]";
+				break;
+			case "1":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[2]";
+				break;
+			case "2":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[3]";
+				break;
+			case "3":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[4]";
+				break;
+			case "4":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[5]";
+				break;
+			case "5":
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[6]";
+				break;
+				}
+			break;
+		
 		default:
 			System.out.println("Automation Error: could not determine the type of object being passed into the xpath builder, trailer, car, passenger type etc.");
 			break;
