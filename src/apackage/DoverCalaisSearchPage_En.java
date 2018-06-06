@@ -97,6 +97,12 @@ public class DoverCalaisSearchPage_En {
 
 	@FindBy(id="re_trailerHeight")
 	private WebElement ReturnTrailerHeight;	
+	
+	@FindBy(xpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/span/span[3]")
+	private WebElement OutboundPets;
+	
+	@FindBy(xpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/span/span[3]")
+	private WebElement ReturnPets;
 
 	//initialize the elements using the selenium PageFactory method
 	public DoverCalaisSearchPage_En(WebDriver driver) {
@@ -316,9 +322,9 @@ public class DoverCalaisSearchPage_En {
 		String objectType = "returnInfants";
 		System.out.println("Setting number of infants to " + infants);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
-		OutboundInfantPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxItContainer")));		
+		ReturnInfantPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_IN_pass_comboBoxSelectBoxItOptions")));
 		xpath = xpathBuilder(objectType, infants);
 		driver.findElement(By.xpath(xpath)).click();
 	}
@@ -326,11 +332,11 @@ public class DoverCalaisSearchPage_En {
 	public void selectOutboundPets(String pets) {	
 		String xpath = null;
 		String objectType = "outboundPets";
-		System.out.println("Setting number of infants to " + pets);
+		System.out.println("Setting number of outbound pets to " + pets);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
-		OutboundInfantPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/span/span[3]")));		
+		OutboundPets.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul")));
 		xpath = xpathBuilder(objectType, pets);
 		driver.findElement(By.xpath(xpath)).click();
 	}
@@ -338,11 +344,11 @@ public class DoverCalaisSearchPage_En {
 	public void selectReturnPets(String pets) {	
 		String xpath = null;
 		String objectType = "returnPets";
-		System.out.println("Setting number of infants to " + pets);
+		System.out.println("Setting number of returning pets to " + pets);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItContainer")));		
-		OutboundInfantPassengers.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_IN_pass_comboBoxSelectBoxItOptions")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/span/span[3]")));		
+		ReturnPets.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul")));
 		xpath = xpathBuilder(objectType, pets);
 		driver.findElement(By.xpath(xpath)).click();
 	}
@@ -365,11 +371,12 @@ public class DoverCalaisSearchPage_En {
 		OutboundTrailerLength.sendKeys(length);		
 	}
 
-	public void selectReturnTrailerHeight(String height) {
+	public void selectReturnTrailerHeight(String height) throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));		
 		System.out.println("Setting a return Trailer height of " + height );
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_trailerHeight")));	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_trailerHeight")));
+		Thread.sleep(5000);
 		ReturnTrailerHeight.click();
 		ReturnTrailerHeight.sendKeys(height);		
 	}
@@ -379,6 +386,12 @@ public class DoverCalaisSearchPage_En {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		System.out.println("Setting a return Trailer length of " + length );
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_trailerLength")));	
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ReturnTrailerLength.click();
 		ReturnTrailerLength.sendKeys(length);		
 	}
