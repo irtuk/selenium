@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DoverCalais {
@@ -36,7 +37,7 @@ public class DoverCalais {
 	public void Before() throws Exception {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
 		driver = new FirefoxDriver();		
-		baseURL = "http://qa2.poferries.com/en/dover-calais";
+		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
 		Searchpage = new DoverCalaisSearchPage_En(driver);
 		driver.manage().window().maximize();
@@ -49,12 +50,25 @@ public class DoverCalais {
 		System.out.println("Should have just switched to default content");
 
 		
-	}
+	}	
+	
+	
 
 
 	@Test
 	public void makeReturnDoverCalaisBooking() throws InterruptedException {
-		Searchpage.clickReturnTripRadioButton();		
+		Searchpage.clickReturnTripRadioButton();	
+		
+		
+		String sometext = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[2]/div[1]/div/ul/li/a")).getText();
+		
+		System.out.println("I have found the text " + sometext);
+		
+		System.out.println("A am checking that this text is 'Dover To Calais'");
+		
+		assert (sometext == "Dover Calais" );
+
+		
 		Searchpage.selectGoingOutDate("14/07/2018");
 		Searchpage.selectComingBackDate("21/07/2018");		
 		Searchpage.selectOutboundSailing("12:55");		
@@ -79,8 +93,24 @@ public class DoverCalais {
 		Searchpage.selectReturnAdults("4");
 		Searchpage.selectReturnChildren("4");
 		Searchpage.selectReturnInfants("4");	
-		Searchpage.selectReturnPets("0");
-	}
+		Searchpage.selectReturnPets("0");		
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@After
