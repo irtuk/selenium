@@ -5,18 +5,20 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.Verifier;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DoverCalais {
 
 	private static WebDriver driver;
 	private static String baseURL ;
 	private static DoverCalaisSearchPage_En Searchpage;	
-
 	
 	String smallCar = "Car ≤ 1.8m h & ≤ 6m l";
 	String mediumCar = "Car 1.8 - 2.4m h & ≤ 6 m l";
@@ -36,7 +38,19 @@ public class DoverCalais {
 	@Before
 	public void Before() throws Exception {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
-		driver = new FirefoxDriver();		
+		
+		//headless
+	    FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    firefoxBinary.addCommandLineOptions("--headless");
+	    System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
+	    FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    firefoxOptions.setBinary(firefoxBinary);
+	    driver = new FirefoxDriver(firefoxOptions);
+		// headless
+			
+		//not headless		
+		//driver = new FirefoxDriver();
+		
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
 		Searchpage = new DoverCalaisSearchPage_En(driver);
@@ -47,28 +61,12 @@ public class DoverCalais {
 		driver.findElement(By.id("buttonAccept")).click();
 		System.out.println("Should have just clicked cookie button");
 		driver.switchTo().defaultContent();
-		System.out.println("Should have just switched to default content");
-
-		
+		System.out.println("Should have just switched to default content");		
 	}	
-	
-	
-
 
 	@Test
 	public void makeReturnDoverCalaisBooking() throws InterruptedException {
 		Searchpage.clickReturnTripRadioButton();	
-		
-		
-		String sometext = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div[2]/div[1]/div/ul/li/a")).getText();
-		
-		System.out.println("I have found the text " + sometext);
-		
-		System.out.println("A am checking that this text is 'Dover To Calais'");
-		
-		assert (sometext == "Dover Calais" );
-
-		
 		Searchpage.selectGoingOutDate("14/07/2018");
 		Searchpage.selectComingBackDate("21/07/2018");		
 		Searchpage.selectOutboundSailing("12:55");		
@@ -112,10 +110,15 @@ public class DoverCalais {
 	
 	
 	
-	
+
+
+
+
+
 	@After
 	public void cleanup() {
-		//driver.close();
+		driver.close();
+		driver.quit();
 		System.out.println("Script terminated");
 	}
 	
