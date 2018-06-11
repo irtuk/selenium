@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="selenium-jars/okhttp-3.9.1.jar"/>
 	<classpathentry kind="lib" path="selenium-jars/okio-1.13.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Ed/Documents/GitHub/selenium/mysql-jdbc-jars/mysql-connector-java-8.0.11/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
