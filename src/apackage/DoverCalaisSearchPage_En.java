@@ -16,7 +16,11 @@ public class DoverCalaisSearchPage_En {
 
 	WebDriver driver;	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
-
+	
+	//bloody FAQ link
+	@FindBy(xpath="//*[@id=\"closeButton\"]")
+	private WebElement CloseFAQButton;
+		
 	//Journey Type
 	@FindBy(id="singleJourneyRadio")
 	private WebElement OneWayRadioButton;
@@ -213,8 +217,9 @@ public class DoverCalaisSearchPage_En {
 	public void selectOutboundVehicleHeight(String height) {
 		System.out.println("Setting an outbound vehicle height of " + height );
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_height")));	
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("//*[contains(@id,'nanoRep_frame_float')]")));
 		outboundVehicleHeight.click();
 		outboundVehicleHeight.sendKeys(height);		
 	}
@@ -224,6 +229,7 @@ public class DoverCalaisSearchPage_En {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_length")));	
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("//*[contains(@id,'nanoRep_frame_float')]")));
 		outboundVehicleLength.click();
 		outboundVehicleLength.sendKeys(length);		
 	}
@@ -245,7 +251,7 @@ public class DoverCalaisSearchPage_En {
 		ReturnVehicleLength.sendKeys(length);
 	}
 
-	public void selectOutboundAdults(String adults)	{	
+	public void selectOutboundAdults(String adults)	{
 		String xpath = null;
 		String objectType = "outboundAdults";
 		System.out.println("Setting number of adults to " + adults);
@@ -271,7 +277,7 @@ public class DoverCalaisSearchPage_En {
 		
 	}
 
-	public void selectOutboundInfants(String infants) {	
+	public void selectOutboundInfants(String infants) {
 		String xpath = null;
 		String objectType = "outboundInfants";
 		System.out.println("Setting number of infants to " + infants);
@@ -283,7 +289,7 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.xpath(xpath)).click();
 	}
 
-	public void selectReturnAdults(String adults)	{	
+	public void selectReturnAdults(String adults)	{
 		String xpath = null;
 		String objectType = "returnAdults";		
 		System.out.println("Setting number of returning adults to " + adults);
@@ -317,7 +323,7 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.xpath(xpath)).click();		
 	}
 
-	public void selectReturnInfants(String infants) {	
+	public void selectReturnInfants(String infants) {
 		String xpath = null;
 		String objectType = "returnInfants";
 		System.out.println("Setting number of infants to " + infants);
@@ -329,7 +335,7 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.xpath(xpath)).click();
 	}
 	
-	public void selectOutboundPets(String pets) {	
+	public void selectOutboundPets(String pets) {
 		String xpath = null;
 		String objectType = "outboundPets";
 		System.out.println("Setting number of outbound pets to " + pets);
@@ -341,7 +347,7 @@ public class DoverCalaisSearchPage_En {
 		driver.findElement(By.xpath(xpath)).click();
 	}
 	
-	public void selectReturnPets(String pets) {	
+	public void selectReturnPets(String pets) {
 		String xpath = null;
 		String objectType = "returnPets";
 		System.out.println("Setting number of returning pets to " + pets);
@@ -382,6 +388,8 @@ public class DoverCalaisSearchPage_En {
 	}
 
 	public void selectReturnTrailerLength(String length) {
+
+		
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("selectboxit-option-anchor")));
 		System.out.println("Setting a return Trailer length of " + length );
@@ -416,6 +424,19 @@ public class DoverCalaisSearchPage_En {
 
 		}
 
+	}
+	
+	public void ClickFAQBox(){
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"widgetTitleWrapper\"]")));
+		System.out.println("Closing FAQ");
+		try {
+			Thread.sleep(5000);
+			CloseFAQButton.click();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+		}
 	}
 
 	private String xpathBuilder ( String objectType, String objectDetail) {
