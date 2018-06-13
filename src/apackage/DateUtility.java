@@ -10,6 +10,7 @@ package apackage;
 	    }
 	    public static String dayName(String inputDate, String format){
 	        Date date = null;
+	        
 	        try {
 	            date = new SimpleDateFormat(format).parse(inputDate);
 	        } catch (ParseException e) {
