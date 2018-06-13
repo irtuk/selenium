@@ -40,16 +40,16 @@ public class DoverCalais {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
 		
 		//headless
-	    FirefoxBinary firefoxBinary = new FirefoxBinary();
-	    firefoxBinary.addCommandLineOptions("--headless");
-	    System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
-	    FirefoxOptions firefoxOptions = new FirefoxOptions();
-	    firefoxOptions.setBinary(firefoxBinary);
-	    driver = new FirefoxDriver(firefoxOptions);
+	    //FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    //firefoxBinary.addCommandLineOptions("--headless");
+	    //System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
+	    //FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    //firefoxOptions.setBinary(firefoxBinary);
+	    //driver = new FirefoxDriver(firefoxOptions);
 		// headless
 			
 		//not headless		
-		//driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
 		
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
