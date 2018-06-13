@@ -39,7 +39,7 @@ public class DoverCalais {
 	public void Before() throws Exception {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
 		
-		//headless
+		////headless
 	    //FirefoxBinary firefoxBinary = new FirefoxBinary();
 	    //firefoxBinary.addCommandLineOptions("--headless");
 	    //System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
