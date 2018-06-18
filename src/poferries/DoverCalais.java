@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class DoverCalais {
 
@@ -38,6 +39,7 @@ public class DoverCalais {
 	@Before
 	public void Before() throws Exception {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
+		System.setProperty("webdriver.ie.driver",".\\selenium-iedriver\\IEDriverServer.exe");
 		
 		////headless
 	    //FirefoxBinary firefoxBinary = new FirefoxBinary();
@@ -49,7 +51,10 @@ public class DoverCalais {
 		// headless
 			
 		//not headless		
-		driver = new FirefoxDriver();
+		//driver = new FirefoxDriver();
+		
+		//Internet Explorer
+		driver = new InternetExplorerDriver();
 		
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
