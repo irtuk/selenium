@@ -1,4 +1,4 @@
-package apackage;
+package poferries;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,9 +13,24 @@ import org.openqa.selenium.WebDriver;
 
 
 public class DoverCalaisSearchPage_En {
+	
+	
+	
+	
+		
+	
+	
+	
+	
+	
 
-	WebDriver driver;	
+	WebDriver driver;
+	
+	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
+	
+	
+	
 
 	//Journey Type
 	@FindBy(id="singleJourneyRadio")
@@ -144,7 +159,7 @@ public class DoverCalaisSearchPage_En {
 		OutboundTimeList.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("singleJourneyTimeComboBoxSelectBoxItOptions")));		
 		driver.findElement(By.id("singleJourneyTimeComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(outboundTime)).click();	
+		driver.findElement(By.linkText(outboundTime)).click();			
 	}
 
 	public void selectReturnSailing(String returnTime) {
