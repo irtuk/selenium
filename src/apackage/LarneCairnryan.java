@@ -35,7 +35,7 @@ public class LarneCairnryan {
 	mytoolbox.selectComingBackDate("25/06/2018");
 	mytoolbox.selectOutboundPets("1");
 	System.out.println("3 adults returning");
-	mytoolbox.SelectOutboundSeniors(1);
+	mytoolbox.SelectOutboundSeniors("1");
 	
 	}	
 	

@@ -123,7 +123,11 @@ public class LarneCairnryanSearchPage_En {
 	
 	@FindBy(xpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/span/span[3]")
 	private WebElement ReturnPets;
-	private String seniors;
+
+	
+	@FindBy(id="ou_SS_pass_comboBoxSelectBoxItArrow")
+	private WebElement ReturnSeniorPassengers;
+	
 
 	//initialize the elements using the selenium PageFactory method
 	public LarneCairnryanSearchPage_En(WebDriver driver) {
@@ -443,7 +447,8 @@ public class LarneCairnryanSearchPage_En {
 		oneReturningAdultPassenger.click();
 
 	}
-	public void SelectOutboundSeniors() {
+	
+	public void SelectOutboundSeniors(String seniors) {
 		String xpath = null;
 		String objectType = "OutboundSeniors";
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -453,7 +458,8 @@ public class LarneCairnryanSearchPage_En {
 		xpath = xpathBuilder(objectType, seniors);
 		driver.findElement(By.xpath(xpath)).click();
 	}
-	public void SelectReturnSeniors() {
+	
+	public void SelectReturnSeniors(String seniors) {
 		String xpath = null;
 		String objectType = "ReturnSeniors";
 		WebDriverWait wait = new WebDriverWait(driver, 10);
