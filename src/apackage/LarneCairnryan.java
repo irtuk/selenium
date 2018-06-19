@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LarneCairnryan {
 	private static WebDriver driver;
-	private static String baseURL="http://qa1.poferries.com/en/larne-cairnryan";
+	private static String baseURL="http://poferries.com/en/larne-cairnryan";
 	private static LarneCairnryanSearchPage_En mytoolbox;
 	
 	

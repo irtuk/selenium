@@ -456,7 +456,12 @@ public class LarneCairnryanSearchPage_En {
 		OutboundSeniorPassengers.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_SS_pass_comboBoxSelectBoxItOptions")));
 		xpath = xpathBuilder(objectType, seniors);
-		driver.findElement(By.xpath(xpath)).click();
+		try {
+			driver.findElement(By.xpath(xpath)).click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void SelectReturnSeniors(String seniors) {
@@ -852,7 +857,8 @@ private String xpathBuilder ( String objectType, String objectDetail) {
 				}			
 			break;
 		
-		case "outboundSeniors":
+		case "OutboundSeniors":
+			System.out.println("here I am");
 			switch (objectDetail) {
 			case "0":
 				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]";
