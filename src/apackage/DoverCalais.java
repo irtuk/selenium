@@ -40,16 +40,16 @@ public class DoverCalais {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
 		
 		//headless
-	    FirefoxBinary firefoxBinary = new FirefoxBinary();
-	    firefoxBinary.addCommandLineOptions("--headless");
-	    System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
-	    FirefoxOptions firefoxOptions = new FirefoxOptions();
-	    firefoxOptions.setBinary(firefoxBinary);
-	    driver = new FirefoxDriver(firefoxOptions);
+	    //FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    //firefoxBinary.addCommandLineOptions("--headless");
+	    //System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
+	    //FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    //firefoxOptions.setBinary(firefoxBinary);
+	    //driver = new FirefoxDriver(firefoxOptions);
 		// headless
 			
 		//not headless		
-		//driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
 		
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
@@ -66,32 +66,39 @@ public class DoverCalais {
 
 	@Test
 	public void makeReturnDoverCalaisBooking() throws InterruptedException {
-		Searchpage.clickReturnTripRadioButton();	
-		Searchpage.selectGoingOutDate("14/07/2018");
-		Searchpage.selectComingBackDate("21/07/2018");		
-		Searchpage.selectOutboundSailing("12:55");		
+//		Searchpage.clickReturnTripRadioButton();	
+//		Searchpage.selectGoingOutDate("14/07/2018");
+//		Searchpage.selectComingBackDate("21/07/2018");		
+//		Searchpage.selectOutboundSailing("12:55");		
+//		Searchpage.selectReturnSailing("14:20");
+//		Searchpage.selectOutboundVehicle(van);
+//		Searchpage.selectOutboundVehicleHeight("2.0");
+//		Searchpage.selectOutboundVehicleLength("3.0");		
+//		Searchpage.selectOutboundTrailer(largeTrailer);
+//		Searchpage.selectOutboundTrailerHeight("1.0");
+//		Searchpage.selectOutboundTrailerLength("4.0");
+//		Searchpage.selectOutboundAdults("3");
+//		Searchpage.selectOutboundChildren("3");
+//		Searchpage.selectOutboundInfants("3");
+//		Searchpage.selectOutboundPets("1");
+//		Searchpage.UncheckSamePassengersCheckbox();		
+//		Searchpage.selectReturnVehicle(largeCar);
+//		Searchpage.selectReturnVehicleHeight("3.0");
+//		Searchpage.selectReturnVehicleLength("2.0");		
+//		Searchpage.selectReturnTrailer(largeTrailer);
+//		Searchpage.selectReturnTrailerHeight("3.0");
+//		Searchpage.selectReturnTrailerLength("6.0");
+//		Searchpage.selectReturnAdults("4");
+//		Searchpage.selectReturnChildren("4");
+//		Searchpage.selectReturnInfants("4");	
+//		Searchpage.selectReturnPets("0");	
+		
+		Searchpage.clickReturnTripRadioButton();
+		Searchpage.selectGoingOutDate("19/09/2018");
+		Searchpage.selectComingBackDate("25/09/2018");
+		Searchpage.selectOutboundSailing("12:05");
 		Searchpage.selectReturnSailing("14:20");
-		Searchpage.selectOutboundVehicle(van);
-		Searchpage.selectOutboundVehicleHeight("2.0");
-		Searchpage.selectOutboundVehicleLength("3.0");		
-		Searchpage.selectOutboundTrailer(largeTrailer);
-		Searchpage.selectOutboundTrailerHeight("1.0");
-		Searchpage.selectOutboundTrailerLength("4.0");
-		Searchpage.selectOutboundAdults("3");
-		Searchpage.selectOutboundChildren("3");
-		Searchpage.selectOutboundInfants("3");
-		Searchpage.selectOutboundPets("1");
-		Searchpage.UncheckSamePassengersCheckbox();		
-		Searchpage.selectReturnVehicle(largeCar);
-		Searchpage.selectReturnVehicleHeight("3.0");
-		Searchpage.selectReturnVehicleLength("2.0");		
-		Searchpage.selectReturnTrailer(largeTrailer);
-		Searchpage.selectReturnTrailerHeight("3.0");
-		Searchpage.selectReturnTrailerLength("6.0");
-		Searchpage.selectReturnAdults("4");
-		Searchpage.selectReturnChildren("4");
-		Searchpage.selectReturnInfants("4");	
-		Searchpage.selectReturnPets("0");		
+		
 		}
 	
 	

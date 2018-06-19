@@ -1,3 +1,14 @@
+/*
+ * Things that need to be done
+ * update the returning pets to take account of the different position of the boxes in the DOM
+ * ditto students
+ * ditto elderlies
+ * create webelement @FINDBY doodads for returning students, elederlies etc.
+ */
+
+
+
+
 package apackage;
 
 import org.openqa.selenium.WebElement;
@@ -12,7 +23,7 @@ import org.openqa.selenium.WebDriver;
 
 
 
-public class DoverCalaisSearchPage_En {
+public class LarneCairnryanSearchPage_En {
 
 	WebDriver driver;	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -57,6 +68,12 @@ public class DoverCalaisSearchPage_En {
 
 	@FindBy(id="ou_IN_pass_comboBoxSelectBoxItArrow")
 	private WebElement OutboundInfantPassengers;
+	
+	@FindBy(id="ou_SS_pass_comboBoxSelectBoxItArrow")
+	private WebElement OutboundSeniorPassengers;
+	
+	@FindBy(id="ou_ST_pass_comboBoxSelectBoxItArrow")
+	private WebElement OutboundStudentPassengers;
 
 	@FindBy(id="ou_length")
 	private WebElement outboundVehicleLength;
@@ -101,14 +118,15 @@ public class DoverCalaisSearchPage_En {
 	@FindBy(id="re_trailerHeight")
 	private WebElement ReturnTrailerHeight;	
 	
-	@FindBy(xpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/span/span[3]")
+	@FindBy(xpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/span/span[3]/i")
 	private WebElement OutboundPets;
 	
 	@FindBy(xpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/span/span[3]")
 	private WebElement ReturnPets;
+	private String seniors;
 
 	//initialize the elements using the selenium PageFactory method
-	public DoverCalaisSearchPage_En(WebDriver driver) {
+	public LarneCairnryanSearchPage_En(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		System.out.println("Should have just initialized the Dover Calais page search factory");		
@@ -337,9 +355,9 @@ public class DoverCalaisSearchPage_En {
 		String objectType = "outboundPets";
 		System.out.println("Setting number of outbound pets to " + pets);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/span/span[3]")));		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/span/span[3]/i")));		
 		OutboundPets.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul")));
 		xpath = xpathBuilder(objectType, pets);
 		driver.findElement(By.xpath(xpath)).click();
 	}
@@ -425,8 +443,26 @@ public class DoverCalaisSearchPage_En {
 		oneReturningAdultPassenger.click();
 
 	}
-
-	
+	public void SelectOutboundSeniors() {
+		String xpath = null;
+		String objectType = "OutboundSeniors";
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_SS_pass_comboBoxSelectBoxItContainer")));		
+		OutboundSeniorPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ou_SS_pass_comboBoxSelectBoxItOptions")));
+		xpath = xpathBuilder(objectType, seniors);
+		driver.findElement(By.xpath(xpath)).click();
+	}
+	public void SelectReturnSeniors() {
+		String xpath = null;
+		String objectType = "ReturnSeniors";
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_SS_pass_comboBoxSelectBoxItContainer")));		
+		ReturnSeniorPassengers.click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("re_SS_pass_comboBoxSelectBoxItOptions")));
+		xpath = xpathBuilder(objectType, seniors);
+		driver.findElement(By.xpath(xpath)).click();
+	}
 private String xpathBuilder ( String objectType, String objectDetail) {
 		// I really don't like this solution, it feels very vulnerable to breaking down
 		// however the javascript drop down boxes respond differently all the time
@@ -809,30 +845,97 @@ private String xpathBuilder ( String objectType, String objectDetail) {
 				break;
 				}			
 			break;
+		
+		case "outboundSeniors":
+			switch (objectDetail) {
+			case "0":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]";
+			break;
+			case "1":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[2]";
+			break;
+			case "2":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[3]";
+			break;
+			case "3":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[4]";
+			break;
+			case "4":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[5]";
+			break;
+			case "5":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[6]";
+			break;
+			case "6":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[7]";
+			break;
+			case "7":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[8]";
+			break;
+			case "8":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[9]";
+			break;
+			case "9":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[10]";
+			break;
+			}
+			
+		case "outboundStudents":
+			switch (objectDetail) {
+			case "0":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[1]";
+			break;
+			case "1":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[2]";
+			break;
+			case "2":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[3]";
+			break;
+			case "3":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[4]";
+			break;
+			case "4":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[5]";
+			break;
+			case "5":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[6]";
+			break;
+			case "6":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[7]";
+			break;
+			case "7":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[8]";
+			break;
+			case "8":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[9]";
+			break;
+			case "9":
+				returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[5]/li[2]/span/ul/li[10]";
+			break;				
+			
+			}
 			
 		case "outboundPets":
 			///html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]
+			
 			switch (objectDetail) {
 
 			case "0":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[1]";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul/li[1]";
 				break;
 			case "1":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[2]";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul/li[2]";
 				break;
 			case "2":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[3]";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul/li[3]";
 				break;
 			case "3":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[4]";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul/li[4]";
 				break;
 			case "4":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[5]";
+				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[6]/li[2]/span/ul/li[5]";
 				break;
-			case "5":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[4]/dd/div/ul[4]/li[2]/span/ul/li[6]";
-				break;
-				}	
+				}
 			break;
 			
 		case "returnPets":
@@ -854,11 +957,44 @@ private String xpathBuilder ( String objectType, String objectDetail) {
 			case "4":
 				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[5]";
 				break;
-			case "5":
-				returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[6]";
-				break;
 				}
 			break;
+			
+		case "returnSeniors":
+			///html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[1]
+		switch (objectDetail) {
+		
+		case "0":
+			returnXpath = "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[1]";
+			break;
+		case "1":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[2]";
+			break;
+		case "2":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[3]";
+			break;
+		case "3":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[4]";
+			break;
+		case "4":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[5]";
+			break;
+		case "5":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[6]";
+			break;
+		case "6":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[7]";
+			break;
+		case "7":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[8]";
+			break;
+		case "8":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[9]";
+			break;
+		case "9":
+			returnXpath =  "/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[4]/li[2]/span/ul/li[10]";
+			break;
+		}
 		
 		default:
 			System.out.println("Automation Error: could not determine the type of object being passed into the xpath builder, trailer, car, passenger type etc.");
