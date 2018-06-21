@@ -1,4 +1,4 @@
-package apackage;
+package poferries;
 
 import static org.junit.Assert.*;
 

@@ -1,9 +1,7 @@
 package poferries;
 
-import apackage.MySQLAccess;
-
 public class dbConnect {
-    public static void main(String[] args) throws Exception {
+    public static void connect(String[] args) throws Exception {
         MySQLAccess dao = new MySQLAccess();
         dao.readDataBase();
     }

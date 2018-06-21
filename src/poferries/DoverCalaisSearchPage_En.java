@@ -13,28 +13,16 @@ import org.openqa.selenium.WebDriver;
 
 
 public class DoverCalaisSearchPage_En {
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
 
-	WebDriver driver;
-	
-	
+	WebDriver driver;	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
-	
-	
-	
 
 	//Journey Type
 	@FindBy(id="singleJourneyRadio")
 	private WebElement OneWayRadioButton;
+	
+	@FindBy(xpath="/html/body/div[1]/div/div[2]/div/div[1]/div/div[1]/div[1]/div/form/div/dl[7]/dd/div/ul[1]/li[2]/span/ul/li[2]")
+	private WebElement oneReturningAdultPassenger;
 
 	@FindBy(id="returnJourneyRadio")
 	private WebElement ReturnJourneyRadioButton;
@@ -159,7 +147,7 @@ public class DoverCalaisSearchPage_En {
 		OutboundTimeList.click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("singleJourneyTimeComboBoxSelectBoxItOptions")));		
 		driver.findElement(By.id("singleJourneyTimeComboBoxSelectBoxItOptions"));
-		driver.findElement(By.linkText(outboundTime)).click();			
+		driver.findElement(By.linkText(outboundTime)).click();	
 	}
 
 	public void selectReturnSailing(String returnTime) {
@@ -432,8 +420,14 @@ public class DoverCalaisSearchPage_En {
 		}
 
 	}
+	
+	private void SelectOneReturningAdultPassenger() {
+		oneReturningAdultPassenger.click();
 
-	private String xpathBuilder ( String objectType, String objectDetail) {
+	}
+
+	
+private String xpathBuilder ( String objectType, String objectDetail) {
 		// I really don't like this solution, it feels very vulnerable to breaking down
 		// however the javascript drop down boxes respond differently all the time
 		// hitting the xpath not the value seems to be the only reliable way to do this right now.

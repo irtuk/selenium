@@ -1,9 +1,7 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/irtuk/selenium.git
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//src/apackage/DoverCalais.java=UTF-8
-encoding//src/apackage/DoverCalaisSearchPage_En.java=UTF-8
-encoding//src/apackage/LarneCairnryanSearchPage_En.java=UTF-8
-=======
 encoding//src/poferries/DoverCalais.java=UTF-8
 encoding//src/poferries/DoverCalaisSearchPage_En.java=UTF-8
->>>>>>> branch 'master' of https://github.com/irtuk/selenium.git
+encoding//src/poferries/LarneCairnryanSearchPage_En.java=UTF-8
