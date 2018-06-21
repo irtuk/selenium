@@ -1,6 +1,6 @@
 package poferries;
 
-import poferries.MySQLAccess;
+import apackage.MySQLAccess;
 
 public class dbConnect {
     public static void main(String[] args) throws Exception {
