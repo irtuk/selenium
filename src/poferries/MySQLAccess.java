@@ -1,4 +1,4 @@
-package apackage;
+package poferries;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.Date;
 
 public class MySQLAccess {
+	//note this is a change to test proxy
     private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
