@@ -93,39 +93,30 @@ public class DoverCalais {
 //		Searchpage.selectReturnInfants("4");	
 //		Searchpage.selectReturnPets("0");	
 		
+//		Searchpage.clickReturnTripRadioButton();
+//		Searchpage.selectGoingOutDate("19/09/2018");
+//		Searchpage.selectComingBackDate("25/09/2018");
+//		Searchpage.selectOutboundSailing("12:05");
+//		Searchpage.selectReturnSailing("14:20");
+		
 		Searchpage.clickReturnTripRadioButton();
-		Searchpage.selectGoingOutDate("19/09/2018");
-		Searchpage.selectComingBackDate("25/09/2018");
-		Searchpage.selectOutboundSailing("12:05");
-		Searchpage.selectReturnSailing("14:20");
+		Searchpage.selectGoingOutDate("14/01/2019");
+		Searchpage.selectComingBackDate("01/02/2019");
+		
+		Searchpage.
+		
+		
+		
 		
 		}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 
 
 
 	@After
 	public void cleanup() {
-		driver.close();
-		driver.quit();
+		//driver.close();
+		//driver.quit();
 		System.out.println("Script terminated");
 	}
 	

@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 public class DoverCalaisSearchPage_En {
 
 	WebDriver driver;	
-	JavascriptExecutor js = (JavascriptExecutor) driver;
+
 
 	//Journey Type
 	@FindBy(id="singleJourneyRadio")
