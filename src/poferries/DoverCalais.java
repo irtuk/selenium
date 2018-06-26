@@ -20,6 +20,8 @@ public class DoverCalais {
 	private static String baseURL ;
 	private static DoverCalaisSearchPage_En Searchpage;	
 	
+	// All these do is make it possible to say "smallCar" and not have to type or paste "Car ≤ 1.8m h & ≤ 6m l"
+	// remember, these are variable names so they do not need to be in quotes.
 	String smallCar = "Car ≤ 1.8m h & ≤ 6m l";
 	String mediumCar = "Car 1.8 - 2.4m h & ≤ 6 m l";
 	String largeCar = "Car > 2.4m h & / or > 6m l";
@@ -33,23 +35,22 @@ public class DoverCalais {
 	String largeTrailer = "Trailer / Caravan > 1.8m h or > 6m l";
 	String smallTrailer = "Trailer ≤ 1.8m h & ≤ 6m l";
 	String noTrailer = "No trailer / Caravan";
-	
 
 	@Before
 	public void Before() throws Exception {
 		System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
 		
 		//headless
-	    //FirefoxBinary firefoxBinary = new FirefoxBinary();
-	    //firefoxBinary.addCommandLineOptions("--headless");
-	    //System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
-	    //FirefoxOptions firefoxOptions = new FirefoxOptions();
-	    //firefoxOptions.setBinary(firefoxBinary);
-	    //driver = new FirefoxDriver(firefoxOptions);
+	    FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    firefoxBinary.addCommandLineOptions("--headless");
+	    System.setProperty("webdriver.gecko.driver", ".\\selenium-geckodriver-firefox\\geckodriver.exe");
+	    FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    firefoxOptions.setBinary(firefoxBinary);
+	    driver = new FirefoxDriver(firefoxOptions);
 		// headless
 			
 		//not headless		
-		driver = new FirefoxDriver();
+		//driver = new FirefoxDriver();
 		
 		baseURL = "http://www.poferries.com/en/dover-calais";
 		//baseURL = "http://www.poferries.com/en/dover-calais";
@@ -57,6 +58,7 @@ public class DoverCalais {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 		driver.get(baseURL);
+		
 		driver.switchTo().frame("qb_cookie_consent_main");
 		driver.findElement(By.id("buttonAccept")).click();
 		System.out.println("Should have just clicked cookie button");
@@ -65,67 +67,25 @@ public class DoverCalais {
 	}	
 
 	@Test
-	public void makeReturnDoverCalaisBooking() throws InterruptedException {
-//		Searchpage.clickReturnTripRadioButton();	
-//		Searchpage.selectGoingOutDate("14/07/2018");
-//		Searchpage.selectComingBackDate("21/07/2018");		
-//		Searchpage.selectOutboundSailing("12:55");		
-//		Searchpage.selectReturnSailing("14:20");
-//		Searchpage.selectOutboundVehicle(van);
-//		Searchpage.selectOutboundVehicleHeight("2.0");
-//		Searchpage.selectOutboundVehicleLength("3.0");		
-//		Searchpage.selectOutboundTrailer(largeTrailer);
-//		Searchpage.selectOutboundTrailerHeight("1.0");
-//		Searchpage.selectOutboundTrailerLength("4.0");
-//		Searchpage.selectOutboundAdults("3");
-//		Searchpage.selectOutboundChildren("3");
-//		Searchpage.selectOutboundInfants("3");
-//		Searchpage.selectOutboundPets("1");
-//		Searchpage.UncheckSamePassengersCheckbox();		
-//		Searchpage.selectReturnVehicle(largeCar);
-//		Searchpage.selectReturnVehicleHeight("3.0");
-//		Searchpage.selectReturnVehicleLength("2.0");		
-//		Searchpage.selectReturnTrailer(largeTrailer);
-//		Searchpage.selectReturnTrailerHeight("3.0");
-//		Searchpage.selectReturnTrailerLength("6.0");
-//		Searchpage.selectReturnAdults("4");
-//		Searchpage.selectReturnChildren("4");
-//		Searchpage.selectReturnInfants("4");	
-//		Searchpage.selectReturnPets("0");	
-		
+	public void makeReturnDoverCalaisBooking() throws InterruptedException {		
 		Searchpage.clickReturnTripRadioButton();
-		Searchpage.selectGoingOutDate("19/09/2018");
-		Searchpage.selectComingBackDate("25/09/2018");
-		Searchpage.selectOutboundSailing("12:05");
-		Searchpage.selectReturnSailing("14:20");
-		
+		Searchpage.selectGoingOutDate("02/07/2018");
+		Searchpage.selectComingBackDate("09/07/2018");
+		Searchpage.selectOutboundVehicle("Van");
+		Searchpage.selectOutboundVehicleHeight("2.5");
+		Searchpage.selectOutboundVehicleLength("6.0");
+		Searchpage.selectOutboundAdults("1");
+		Searchpage.UncheckSamePassengersCheckbox();
+		Searchpage.selectReturnVehicle(smallCar);
+		Searchpage.selectReturnAdults("4");
+		Searchpage.selectReturnPets("2");		
 		}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
 	@After
 	public void cleanup() {
-		driver.close();
-		driver.quit();
+	//	driver.close();
+	//	driver.quit();
 		System.out.println("Script terminated");
 	}
 	
